@@ -1,0 +1,24 @@
+package ua.training.dao;
+
+
+import ua.training.dao.impl.JDBCDaoFactory;
+
+public abstract class DaoFactory {
+    private static DaoFactory daoFactory;
+
+    public abstract UserDAO createUserDAO();
+    public abstract TourDAO createTourDAO();
+    public abstract TourOrderDAO createTourOrderDAO();
+
+    public static DaoFactory getInstance(){
+        if( daoFactory == null ){
+            synchronized (DaoFactory.class){
+                if(daoFactory==null){
+                    DaoFactory temp = new JDBCDaoFactory();
+                    daoFactory = temp;
+                }
+            }
+        }
+        return daoFactory;
+    }
+}
