@@ -5,6 +5,7 @@ import ua.training.dao.UserDAO;
 import ua.training.dao.impl.JDBCUserDao;
 import ua.training.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserService {
@@ -26,4 +27,15 @@ public class UserService {
         }
     }
 
+    public List<User> findAll() {
+        try(UserDAO dao = daoFactory.createUserDAO()){
+            return dao.findAll();
+        }
+    }
+
+    public void changeRole(int userId, String role) {
+        try(UserDAO dao = daoFactory.createUserDAO()){
+            dao.changeRole(userId, role);
+        }
+    }
 }

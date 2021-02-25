@@ -15,23 +15,25 @@
 <body>
 <c:import url="/header.jsp" />
 <fmt:message bundle="${msg}" key="greeting"/>
-<div align="center">
-    <form action="login" method="post">
-        <div class="row mb-3 mt-5 align-items-center">
-            <label class="col-sm-2 col-form-label" ><fmt:message bundle="${msg}" key="user.login"/></label>
-            <div class="col-sm-5">
-                <input class="form-control" type="text" name="login" required/>
-            </div>
+<div class="container mt-5">
+        <div class="row mt-3 mb-3">
+            <label class="col-sm-2 col-form-label" text="<fmt:message bundle="${msg}" key="user.login"/>"></label>
+            <label class="col-sm-2 col-form-label" text="<fmt:message bundle="${msg}" key="user.roles"/>"></label>
         </div>
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label"><fmt:message bundle="${msg}" key="user.password"/></label>
-            <div class="col-sm-5">
-                <input class="form-control" type="password" name="password" required/>
+        <c:forEach items="${users}" var="user">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" ><c:out value="${user.login}"/></label>
+                <label class="col-sm-2 col-form-label" ><c:out value="${user.role}"/></label>
+                <label class="col-sm-2 col-form-label">
+                    <form action="controller/usercontrol/change_role" method="post">
+                        <input type="hidden" value="${user.id}" name="userId"/>
+                        <input type="hidden" value="${user.role}" name="userRole"/>
+                        <input class="btn btn-primary" type="submit" value="<fmt:message bundle="${msg}" key="user.change_role"/>"/>
+                    </form>
+                </label>
             </div>
-        </div>
-        <div><button class="btn btn-primary" type="submit"><fmt:message bundle="${msg}" key="main.login"/></button></div>
-        <a href="/registration"><fmt:message bundle="${msg}" key="main.registry"/></a>
-    </form>
+        </c:forEach>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>

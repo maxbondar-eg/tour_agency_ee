@@ -9,6 +9,8 @@ public class TourDeleteCommand implements Command{
 
     @Override
     public String execute(HttpServletRequest request) {
-        return "/index.jsp";
+        int tourId = Integer.parseInt(request.getParameter("tourId"));
+        tourService.deleteTour(tourId);
+        return "redirect:/tourcontrol";
     }
 }

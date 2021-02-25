@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<fmt:setLocale value="UA"/>
+<fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages" var="msg" />
 <html>
 <head>
@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<c:import url="/WEB-INF/header.jsp" />
+<c:import url="/header.jsp" />
 <fmt:message bundle="${msg}" key="greeting"/>
 <div align="center">
     <form method="post">

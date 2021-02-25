@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages" var="msg" />
-<html lang="${sessionScope.lang}">
+<html>
 <head>
     <title>TourAgency</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,28 +14,33 @@
 </head>
 <body>
 <c:import url="/header.jsp" />
-<fmt:message bundle="${msg}" key="greeting"/>
-<c:out value="${sessionScope.login}"/>
-<c:out value="${sessionScope.role}"/>
-<c:out value="${sessionScope.lang}"/>
+<fmt:message bundle="${msg}" key="tour.order.quantity"/>
+<c:set var="user" scope="request" value="${user}" />
 <div class="container mt-5">
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label"><fmt:message bundle="${msg}" key="user.firstname"/></label>
+        <label class="col-sm-2 col-form-label"><c:out value="${user.firstName}"/></label>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label"><fmt:message bundle="${msg}" key="user.lastname"/></label>
+        <label class="col-sm-2 col-form-label"><c:out value="${user.lastName}"/></label>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label"><fmt:message bundle="${msg}" key="user.login"/></label>
+        <label class="col-sm-2 col-form-label"><c:out value="${user.login}"/></label>
+    </div>
+    <h4><fmt:message bundle="${msg}" key="user.tours"/></h4>
     <div class="row row-cols-3 row-cols-md-3 g-4">
-        <c:forEach items="${tours}" var="tour">
+        <c:forEach items="${userOrders}" var="order">
             <div class="col">
                 <div class="card text-center border-primary mb-3 h-100" style="width: 18rem;">
-                    <div class="card-header">
-                        <h4><c:out value="${tour.name}"/></h4>
-                    </div>
-                    <img src="${pageContext.request.contextPath}/images/${tour.img}">
                     <div class="card-body">
-                        <h5><c:out value="${tour.price}"/></h5>
-                        <p><c:out value="${tour.description}"/></p>
+                        <h5><c:out value="${order.id}"/></h5>
+                        <p><span><fmt:message bundle="${msg}" key="tour.order.name"/>: </span><span><c:out value="${order.tourName}"/></span></p>
+                        <p><span><fmt:message bundle="${msg}" key="tour.order.quantity"/>: </span><span><c:out value="${order.ticketsQuantity}"/></span></p>
                     </div>
                     <div class="card-footer">
-                        <form action="controller/tourpage" method="get">
-                            <input type="hidden" value="${tour.id}" name="tourId"/>
-                            <input class="btn btn-primary" type="submit" value="<fmt:message bundle="${msg}" key="tour.details"/>">
-                        </form>
+                        <h6><c:out value="${order.status}"/></h6>
                     </div>
                 </div>
             </div>

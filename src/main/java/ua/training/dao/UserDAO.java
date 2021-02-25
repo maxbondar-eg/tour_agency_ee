@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface UserDAO extends GenericDAO<User>{
     Optional<User> findByLogin(String login);
+
+    void changeRole(int userId, String role);
 }

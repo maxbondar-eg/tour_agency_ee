@@ -32,4 +32,16 @@ public class TourService {
             dao.add(tour);
         }
     }
+
+    public void deleteTour(int tourId) {
+        try(TourDAO dao = daoFactory.createTourDAO()){
+            dao.delete(tourId);
+        }
+    }
+
+    public void editTour(Tour tour) {
+        try(TourDAO dao = daoFactory.createTourDAO()){
+            dao.edit(tour);
+        }
+    }
 }

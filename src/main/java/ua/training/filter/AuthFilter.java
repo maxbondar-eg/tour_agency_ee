@@ -31,7 +31,6 @@ public class AuthFilter implements Filter {
          UserService userService = new UserService();
 
         final HttpSession session = req.getSession();
-        session.setAttribute("test", "Hello from servlet");
 
         if(nonNull(session) && nonNull(session.getAttribute("login"))){
             final Role role = (Role) session.getAttribute("role");
@@ -44,6 +43,7 @@ public class AuthFilter implements Filter {
 
             moveToMenu(req, resp, role);
         } else {
+            System.out.println("GUest");
             moveToMenu(req, resp, Role.GUEST);
         }
 
@@ -51,11 +51,13 @@ public class AuthFilter implements Filter {
     }
 
     private void moveToMenu(HttpServletRequest req, HttpServletResponse resp, Role role) throws IOException {
-        if((req.getRequestURI().contains("admin") && !role.equals(Role.ADMIN)) ||
-                (req.getRequestURI().contains("user") && !role.equals(Role.ADMIN))){
+        if (role.equals(Role.GUEST) && !(req.getRequestURI().contains("registration") || req.getRequestURI().contains("login") || req.getRequestURI().equals("/controller"))) {
             throw new RuntimeException("Access denied");
-        }else if(role.equals(Role.GUEST)){
-            resp.sendRedirect("/login");
+        }
+
+        if(role.equals(Role.USER) && (req.getRequestURI().contains("tourcontrol") || req.getRequestURI().contains("orders")
+        || req.getRequestURI().contains("usercontrol"))){
+            throw new RuntimeException("Access denied");
         }
     }
 }

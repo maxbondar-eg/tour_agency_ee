@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="UA"/>
+<fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages" var="msg" />
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
@@ -18,28 +18,36 @@
         </button>
         <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="controller/cabinet"><fmt:message bundle="${msg}" key="navi.cabinet"/></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="controller/orders"><fmt:message bundle="${msg}" key="navi.orders"/></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="controller/tourcontrol"><fmt:message bundle="${msg}" key="navi.tours"/></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="controller/usercontrol"><fmt:message bundle="${msg}" key="navi.users"/></a>
-                </li>
+                <c:if test="${sessionScope.role ne null}">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="controller/cabinet"><fmt:message bundle="${msg}" key="navi.cabinet"/></a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.role == 'ADMIN'}">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="controller/orders"><fmt:message bundle="${msg}" key="navi.orders"/></a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.role == 'ADMIN'}">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="controller/tourcontrol"><fmt:message bundle="${msg}" key="navi.tours"/></a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.role == 'ADMIN'}">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="controller/usercontrol"><fmt:message bundle="${msg}" key="navi.users"/></a>
+                    </li>
+                </c:if>
             </ul>
             <div class="navbar-text mx-auto">
                 <fmt:message bundle="${msg}" key="greeting"/>
             </div>
         </div>
         <button class="btn btn-default ml-auto" type="button">
-            <img src="/WEB-INF/images/uk.png}">
+            <a href="?sessionLocale=us"><img src="${pageContext.request.contextPath}/images/uk.png"></a>
         </button>
         <button class="btn btn-default" type="button">
-            <img src="/WEB-INF/images/ua.png}">
+            <a href="?sessionLocale=ua"><img src="${pageContext.request.contextPath}/images/ua.png"></a>
         </button>
         <c:if test="${sessionScope.login eq null}">
             <a class="nav-link active" aria-current="page" href="controller/login"><fmt:message bundle="${msg}" key="main.login"/></a>

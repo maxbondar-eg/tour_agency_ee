@@ -1,11 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<fmt:setLocale value="UA"/>
+<fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages" var="msg" />
 <html>
 <head>
-    <title>Index</title>
+    <title>TourAgency</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<c:import url="/WEB-INF/header.jsp" />
+<c:import url="/header.jsp" />
 <fmt:message bundle="${msg}" key="greeting"/>
 <div class="container mt-5">
     <div class="text-center">
@@ -26,9 +26,7 @@
                     <div class="card-header">
                         <h4><c:out value="${tour.name}"/></h4>
                     </div>
-                    <img src="${pageContext.request.contextPath}/WEB-INF/images/morroco.jpg">
-                    <c:out value="${pageContext.request.contextPath}/WEB-INF/images/${tour.img}"/>
-                    <c:out value="${pageContext.request.getContextPath()}"/>
+                    <img src="${pageContext.request.contextPath}/images/${tour.img}">
                     <div class="card-body">
                         <h5><c:out value="${tour.price}"/></h5>
                         <p><c:out value="${tour.description}"/></p>

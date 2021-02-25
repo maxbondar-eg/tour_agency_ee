@@ -23,6 +23,12 @@ public class Servlet extends HttpServlet {
         commands.put("tourcontrol/add", new TourAddCommand());
         commands.put("tourcontrol/edit", new TourEditCommand());
         commands.put("tourcontrol/delete", new TourDeleteCommand());
+        commands.put("cabinet", new CabinetCommand());
+        commands.put("orders", new OrdersCommand());
+        commands.put("orders/canceled", new OrderCancelCommand());
+        commands.put("orders/paid", new OrderPayCommand());
+        commands.put("usercontrol", new UserControlCommand());
+        commands.put("usercontrol/change_role", new UserChangeRoleCommand());
     }
 
     @Override

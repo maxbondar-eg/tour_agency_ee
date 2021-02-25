@@ -12,8 +12,10 @@ import java.util.Optional;
 public class JDBCTourDao implements TourDAO {
 
     public static final String FIND_ALL_TOURS = "select * from tour";
+    public static final String DELETE_TOUR = "delete from tour where id=?";
     public static final String FIND_BY_ID = "select * from tour where id=?";
     public static final String ADD_TOUR = "insert into tour( name ,description,price,tour_type,people_amount,stars,is_hot,img) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    public static final String EDIT_TOUR = "update tour set name=?,description=?,price=?,tour_type=?,people_amount=?,stars=?,is_hot=?,img=? where id=?";
 
     private Connection connection;
 
@@ -77,6 +79,13 @@ public class JDBCTourDao implements TourDAO {
 
     @Override
     public void delete(int id) {
+        try(PreparedStatement ps = connection.prepareStatement(DELETE_TOUR)){
+            ps.setInt(1,id);
+            ps.executeUpdate();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new RuntimeException();
+        }
 
     }
 
@@ -86,6 +95,25 @@ public class JDBCTourDao implements TourDAO {
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void edit(Tour tour) {
+        try(PreparedStatement ps = connection.prepareStatement(EDIT_TOUR)){
+            ps.setString(1, tour.getName());
+            ps.setString(2, tour.getDescription());
+            ps.setInt(3, tour.getPrice());
+            ps.setString(4, tour.getTourType().name());
+            ps.setInt(5,tour.getPeopleAmount());
+            ps.setInt(6, tour.getStars());
+            ps.setBoolean(7, tour.isHot());
+            ps.setString(8, tour.getImg());
+            ps.setInt(9,tour.getId());
+            ps.executeUpdate();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new RuntimeException();
         }
     }
 }
