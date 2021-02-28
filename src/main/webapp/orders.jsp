@@ -33,8 +33,8 @@
                         <input class="btn btn-primary mb-1" type="submit" value="<fmt:message bundle="${msg}" key="order.canceled"/>"/>
                     </form>
                     <form action="controller/orders/paid" method="post">
-                        <input type="hidden" value="${order.id}" name="userId"/>
-                        <input class="btn btn-primary" type="submit" value="<fmt:message bundle="${msg}" key="user.change_role"/>"/>
+                        <input type="hidden" value="${order.id}" name="orderId"/>
+                        <input class="btn btn-primary" type="submit" value="<fmt:message bundle="${msg}" key="order.paid"/>"/>
                     </form>
                 </div>
             </div>

@@ -3,14 +3,11 @@ package ua.training;
 import org.junit.Assert;
 import org.junit.Test;
 import ua.training.command.MainPageCommand;
-import ua.training.model.Tour;
 import ua.training.service.TourService;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.*;
-
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 public class MainCommandTest {
 
