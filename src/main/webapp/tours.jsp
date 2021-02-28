@@ -14,7 +14,6 @@
 </head>
 <body>
 <c:import url="/header.jsp" />
-<fmt:message bundle="${msg}" key="greeting"/>
 <div class="container mt-5">
     <div class="text-center">
         <h2><a class="btn btn-primary" href="tourcontrol/add"><fmt:message bundle="${msg}" key="tour.add"/></a></h2>

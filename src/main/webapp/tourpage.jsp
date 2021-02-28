@@ -14,7 +14,6 @@
 </head>
 <body>
 <c:import url="/header.jsp" />
-<fmt:message bundle="${msg}" key="greeting"/>
 <c:set var="tour" scope="request" value="${tour}" />
 <div class="container mt-3">
     <h1><c:out value="${tour.name}"/></h1>

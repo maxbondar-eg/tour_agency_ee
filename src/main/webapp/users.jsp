@@ -14,7 +14,6 @@
 </head>
 <body>
 <c:import url="/header.jsp" />
-<fmt:message bundle="${msg}" key="greeting"/>
 <div class="container mt-5">
         <div class="row mt-3 mb-3">
             <label class="col-sm-2 col-form-label" text="<fmt:message bundle="${msg}" key="user.login"/>"></label>

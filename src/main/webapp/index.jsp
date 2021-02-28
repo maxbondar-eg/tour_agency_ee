@@ -14,10 +14,6 @@
 </head>
 <body>
 <c:import url="/header.jsp" />
-<fmt:message bundle="${msg}" key="greeting"/>
-<c:out value="${sessionScope.login}"/>
-<c:out value="${sessionScope.role}"/>
-<c:out value="${sessionScope.lang}"/>
 <div class="container mt-5">
     <div class="row row-cols-3 row-cols-md-3 g-4">
         <c:forEach items="${tours}" var="tour">

@@ -12,7 +12,6 @@ public class MainPageCommand  implements Command{
     @Override
     public String execute(HttpServletRequest request) {
         List<Tour> tours = tourService.findAll();
-        System.out.println(tours.get(0).getName() + " NAME");
         request.setAttribute("tours", tours);
         return "/index.jsp";
     }

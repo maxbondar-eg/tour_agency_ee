@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="mb" uri="/WEB-INF/dateTag"%>
+
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages" var="msg" />
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
@@ -41,6 +43,7 @@
             </ul>
             <div class="navbar-text mx-auto">
                 <fmt:message bundle="${msg}" key="greeting"/>
+                <mb:currentDate format="d-MM-yyyy"/>
             </div>
         </div>
         <button class="btn btn-default ml-auto" type="button">

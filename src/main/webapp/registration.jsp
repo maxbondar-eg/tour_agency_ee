@@ -14,7 +14,6 @@
 </head>
 <body>
 <c:import url="/header.jsp" />
-<fmt:message bundle="${msg}" key="greeting"/>
 <div align="center">
     <form action="registration" method="post">
         <div class="row mb-3 mt-5 align-items-center">
